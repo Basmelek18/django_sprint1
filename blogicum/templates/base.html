@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html lang="ru">
+  <head>
+    {% include "includes/settings.html" %}
+    {% block title %}{% endblock %}
+  </head>
+  <body>
+    {% include "includes/header.html" %}
+    <main>
+      <div class="container py-5">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </main>
+    {% include "includes/footer.html" %}
+  </body>
 </html>
