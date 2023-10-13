@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 posts = [
@@ -46,17 +47,21 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    context = {'post': posts[::-1]}
+    context = {'post': posts}
     return render(request, template, context)
 
 
 def post_detail(request, post_id):
     template = 'blog/detail.html'
-    context = {'post': posts[post_id]}
-    return render(request, template, context)
+#    context = {'post': posts[post_id]}
+    post = next((post for post in posts if post.get('id') == post_id), None)
+    if post is None:
+        raise Http404(f'Movie not found with id {post_id}.')
+
+    return render(request, template, {'post': posts[post_id]})
 
 
 def category_posts(request, category):
     template = 'blog/category.html'
-    context = {'post': category}
+    context = {'category': category}
     return render(request, template, context)
