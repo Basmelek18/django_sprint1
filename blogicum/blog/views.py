@@ -53,7 +53,6 @@ def index(request):
 
 def post_detail(request, post_id):
     template = 'blog/detail.html'
-#    context = {'post': posts[post_id]}
     post = next((post for post in posts if post.get('id') == post_id), None)
     if post is None:
         raise Http404(f'Movie not found with id {post_id}.')
