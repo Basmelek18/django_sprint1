@@ -6,6 +6,6 @@
   <h1>Лента записей</h1>
   {% for post in post|dictsortreversed:'id' %}
     <hr>
-    {% include "includes/article.html" with full_text=False %}
+    {% include "includes/article.html" with full_text=True %}
   {% endfor %}
 {% endblock %}

@@ -53,11 +53,11 @@ def index(request):
 
 def post_detail(request, post_id):
     template = 'blog/detail.html'
-    post = next((post for post in posts if post.get('id') == post_id), None)
-    if post is None:
+    post_dict = {post['id']: post for post in posts}
+    if post_id not in post_dict:
         raise Http404(f'Movie not found with id {post_id}.')
-
-    return render(request, template, {'post': posts[post_id]})
+    context = {'post': post_dict[post_id]}
+    return render(request, template, context)
 
 
 def category_posts(request, category):
